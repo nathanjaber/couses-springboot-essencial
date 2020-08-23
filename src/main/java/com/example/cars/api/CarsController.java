@@ -33,4 +33,10 @@ public class CarsController {
         Car newCar = service.insertCar(car);
         return "Car " + newCar.getId() + " successfully saved";
     }
+
+    @PutMapping("/{id}")
+    public String putCar(@PathVariable("id") Long id, @RequestBody Car car) {
+        Car updatedCar = service.updateCar(id, car);
+        return "Car " + updatedCar.getId() + " successfully updated";
+    }
 }

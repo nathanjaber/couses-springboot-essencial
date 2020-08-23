@@ -2,6 +2,7 @@ package com.example.cars.domain;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,34 @@ public class CarService {
 
     public Car insertCar(Car car) {
         return rep.save(car);
+    }
+
+    public Car updateCar(Long id, Car car) {
+        Assert.notNull(id, "id not informed");
+
+        Optional<Car> optional = getCarById(id);
+        if(optional.isPresent()) {
+            Car db = optional.get();
+            db.setName(car.getName());
+            db.setType(car.getType());
+            System.out.println("Carro id " + db.getId());
+
+            rep.save(db);
+
+            return db;
+        } else {
+            throw new RuntimeException("Could not update record");
+        }
+
+//        Using map
+//        getCarById(id).map(db -> {
+//            db.setName(car.getName());
+//            db.setType(car.getType());
+//            System.out.println("Car id " + db.getId());
+//            rep.save(db);
+//
+//            return db;
+//        }).orElseThrow(() -> new RuntimeException("Could not update record"));
     }
 
     public List<Car> getFakeCars() {
