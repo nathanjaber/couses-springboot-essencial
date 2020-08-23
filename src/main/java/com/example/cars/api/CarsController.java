@@ -16,7 +16,7 @@ public class CarsController {
     private CarService service;
 
     @GetMapping()
-    public List<Car> get(){
+    public Iterable<Car> get(){
         return service.getCars();
     }
 }
