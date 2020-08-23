@@ -1,8 +1,11 @@
 package com.example.cars.domain;
 
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class CarService {
 
     public List<Car> getCars() {
