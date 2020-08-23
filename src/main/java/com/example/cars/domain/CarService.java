@@ -38,7 +38,6 @@ public class CarService {
             Car db = optional.get();
             db.setName(car.getName());
             db.setType(car.getType());
-            System.out.println("Carro id " + db.getId());
 
             rep.save(db);
 
