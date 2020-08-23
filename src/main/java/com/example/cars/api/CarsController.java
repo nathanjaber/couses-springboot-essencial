@@ -22,7 +22,12 @@ public class CarsController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Car> getById(@PathVariable("id") Long id) {
+    public Optional<Car> get(@PathVariable("id") Long id) {
         return service.getCarById(id);
+    }
+
+    @GetMapping("/type/{type}")
+    public Iterable<Car> getCarsByType(@PathVariable("type") String type) {
+        return service.getCarByType(type);
     }
 }

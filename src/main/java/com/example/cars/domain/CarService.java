@@ -21,13 +21,19 @@ public class CarService {
         return rep.findById(id);
     }
 
+    public Iterable <Car> getCarByType(String type) {
+        return rep.findByType(type);
+    }
+
     public List<Car> getFakeCars() {
         List<Car> cars = new ArrayList<>();
 
-        cars.add(new Car(1L, "Fusca"));
-        cars.add(new Car(2L, "Brasilia"));
-        cars.add(new Car(3L, "Chevette"));
+        cars.add(new Car(1L, "Fusca", "classicos"));
+        cars.add(new Car(2L, "Brasilia", "classicos"));
+        cars.add(new Car(3L, "Chevette", "classicos"));
 
         return  cars;
     }
+
+
 }
