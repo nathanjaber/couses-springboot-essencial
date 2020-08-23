@@ -39,4 +39,10 @@ public class CarsController {
         Car updatedCar = service.updateCar(id, car);
         return "Car " + updatedCar.getId() + " successfully updated";
     }
+
+    @DeleteMapping("/{id}")
+    public String deleteCar(@PathVariable("id") Long id) {
+        service.deleteCar(id);
+        return "Car " + id + " successfully deleted";
+    }
 }

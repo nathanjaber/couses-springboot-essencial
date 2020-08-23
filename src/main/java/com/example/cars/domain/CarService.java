@@ -58,6 +58,15 @@ public class CarService {
 //        }).orElseThrow(() -> new RuntimeException("Could not update record"));
     }
 
+    public void deleteCar(Long id) {
+        Optional<Car> optional = getCarById(id);
+        if(optional.isPresent()) {
+            rep.deleteById(id);
+        } else {
+            throw new RuntimeException("Could not delete record");
+        }
+    }
+
     public List<Car> getFakeCars() {
         List<Car> cars = new ArrayList<>();
 
@@ -67,4 +76,6 @@ public class CarService {
 
         return  cars;
     }
+
+
 }
