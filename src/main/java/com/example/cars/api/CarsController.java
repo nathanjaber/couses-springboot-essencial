@@ -3,10 +3,7 @@ package com.example.cars.api;
 import com.example.cars.domain.Car;
 import com.example.cars.domain.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -29,5 +26,11 @@ public class CarsController {
     @GetMapping("/type/{type}")
     public Iterable<Car> getCarsByType(@PathVariable("type") String type) {
         return service.getCarByType(type);
+    }
+
+    @PostMapping
+    public String postCar(@RequestBody Car car) {
+        Car newCar = service.save(car);
+        return "Car " + newCar.getId() + " successfully saved";
     }
 }

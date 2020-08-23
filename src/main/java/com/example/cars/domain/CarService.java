@@ -25,6 +25,10 @@ public class CarService {
         return rep.findByType(type);
     }
 
+    public Car save(Car car) {
+        return rep.save(car);
+    }
+
     public List<Car> getFakeCars() {
         List<Car> cars = new ArrayList<>();
 
@@ -34,6 +38,4 @@ public class CarService {
 
         return  cars;
     }
-
-
 }
