@@ -25,7 +25,7 @@ public class CarService {
         return rep.findByType(type);
     }
 
-    public Car save(Car car) {
+    public Car insertCar(Car car) {
         return rep.save(car);
     }
 
