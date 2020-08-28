@@ -2,10 +2,12 @@ package com.example.cars.api;
 
 import com.example.cars.domain.Car;
 import com.example.cars.domain.CarService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -28,8 +30,11 @@ public class CarsController {
     }
 
     @GetMapping("/type/{type}")
-    public Iterable<Car> getCarsByType(@PathVariable("type") String type) {
-        return service.getCarByType(type);
+    public ResponseEntity getCarsByType(@PathVariable("type") String type) {
+        List<Car> cars = service.getCarByType(type);
+        return cars.isEmpty() ?
+                ResponseEntity.noContent().build() :
+                ResponseEntity.ok(cars);
     }
 
     @PostMapping
