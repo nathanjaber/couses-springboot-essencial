@@ -20,8 +20,11 @@ public class CarsController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Car> get(@PathVariable("id") Long id) {
-        return service.getCarById(id);
+    public ResponseEntity get(@PathVariable("id") Long id) {
+        Optional<Car> car = service.getCarById(id);
+
+        return car.map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/type/{type}")
