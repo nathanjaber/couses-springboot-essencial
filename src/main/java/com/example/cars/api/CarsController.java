@@ -3,6 +3,7 @@ package com.example.cars.api;
 import com.example.cars.domain.Car;
 import com.example.cars.domain.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -14,8 +15,8 @@ public class CarsController {
     private CarService service;
 
     @GetMapping()
-    public Iterable<Car> get() {
-        return service.getCars();
+    public ResponseEntity<Iterable<Car>> get() {
+        return ResponseEntity.ok(service.getCars());
     }
 
     @GetMapping("/{id}")
