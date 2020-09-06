@@ -2,6 +2,7 @@ package com.example.cars.api;
 
 import com.example.cars.domain.Car;
 import com.example.cars.domain.CarService;
+import com.example.cars.domain.dto.CarDTO;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,7 @@ public class CarsController {
     private CarService service;
 
     @GetMapping()
-    public ResponseEntity<Iterable<Car>> get() {
+    public ResponseEntity get() {
         return ResponseEntity.ok(service.getCars());
     }
 
@@ -31,7 +32,7 @@ public class CarsController {
 
     @GetMapping("/type/{type}")
     public ResponseEntity getCarsByType(@PathVariable("type") String type) {
-        List<Car> cars = service.getCarByType(type);
+        List<CarDTO> cars = service.getCarByType(type);
         return cars.isEmpty() ?
                 ResponseEntity.noContent().build() :
                 ResponseEntity.ok(cars);
