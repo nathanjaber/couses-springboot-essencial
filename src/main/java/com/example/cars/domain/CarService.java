@@ -65,16 +65,4 @@ public class CarService {
             throw new RuntimeException("Could not delete record");
         }
     }
-
-    public List<Car> getFakeCars() {
-        List<Car> cars = new ArrayList<>();
-
-        cars.add(new Car(1L, "Fusca", "classicos"));
-        cars.add(new Car(2L, "Brasilia", "classicos"));
-        cars.add(new Car(3L, "Chevette", "classicos"));
-
-        return  cars;
-    }
-
-
 }
