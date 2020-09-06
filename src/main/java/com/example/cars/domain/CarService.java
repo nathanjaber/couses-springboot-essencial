@@ -20,8 +20,8 @@ public class CarService {
         return rep.findAll().stream().map(CarDTO::new).collect(Collectors.toList());
     }
 
-    public Optional<Car> getCarById(Long id) {
-        return rep.findById(id);
+    public Optional<CarDTO> getCarById(Long id) {
+        return rep.findById(id).map(CarDTO::new);
     }
 
     public List<CarDTO> getCarByType(String type) {
@@ -35,7 +35,7 @@ public class CarService {
     public Car updateCar(Long id, Car car) {
         Assert.notNull(id, "id not informed");
 
-        Optional<Car> optional = getCarById(id);
+        Optional<Car> optional = rep.findById(id);
         if(optional.isPresent()) {
             Car db = optional.get();
             db.setName(car.getName());
@@ -60,11 +60,8 @@ public class CarService {
     }
 
     public void deleteCar(Long id) {
-        Optional<Car> optional = getCarById(id);
-        if(optional.isPresent()) {
+        if(getCarById(id).isPresent()) {
             rep.deleteById(id);
-        } else {
-            throw new RuntimeException("Could not delete record");
         }
     }
 }
