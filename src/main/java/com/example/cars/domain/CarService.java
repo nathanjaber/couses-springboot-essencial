@@ -17,15 +17,15 @@ public class CarService {
     private CarRepository rep;
 
     public List<CarDTO> getCars() {
-        return rep.findAll().stream().map(CarDTO::new).collect(Collectors.toList());
+        return rep.findAll().stream().map(CarDTO::create).collect(Collectors.toList());
     }
 
     public Optional<CarDTO> getCarById(Long id) {
-        return rep.findById(id).map(CarDTO::new);
+        return rep.findById(id).map(CarDTO::create);
     }
 
     public List<CarDTO> getCarByType(String type) {
-        return rep.findByType(type).stream().map(CarDTO::new).collect(Collectors.toList());
+        return rep.findByType(type).stream().map(CarDTO::create).collect(Collectors.toList());
     }
 
     public Car insertCar(Car car) {
