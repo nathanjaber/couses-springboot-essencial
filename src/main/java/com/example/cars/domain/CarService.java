@@ -34,7 +34,7 @@ public class CarService {
         return CarDTO.create(rep.save(car));
     }
 
-    public Car updateCar(Long id, Car car) {
+    public CarDTO updateCar(Long id, Car car) {
         Assert.notNull(id, "id not informed");
 
         Optional<Car> optional = rep.findById(id);
@@ -45,10 +45,9 @@ public class CarService {
 
             rep.save(db);
 
-            return db;
-        } else {
-            throw new RuntimeException("Could not update record");
+            return CarDTO.create(db);
         }
+        return null;
 
 //        Using map
 //        getCarById(id).map(db -> {
