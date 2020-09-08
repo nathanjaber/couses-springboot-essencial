@@ -28,8 +28,10 @@ public class CarService {
         return rep.findByType(type).stream().map(CarDTO::create).collect(Collectors.toList());
     }
 
-    public Car insertCar(Car car) {
-        return rep.save(car);
+    public CarDTO insertCar(Car car) {
+        Assert.isNull(car.getId(), "id not informed");
+
+        return CarDTO.create(rep.save(car));
     }
 
     public Car updateCar(Long id, Car car) {

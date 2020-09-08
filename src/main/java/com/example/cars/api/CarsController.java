@@ -7,7 +7,9 @@ import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,9 +41,19 @@ public class CarsController {
     }
 
     @PostMapping
-    public String postCar(@RequestBody Car car) {
-        Car newCar = service.insertCar(car);
-        return "Car " + newCar.getId() + " successfully saved";
+    public ResponseEntity postCar(@RequestBody Car car) {
+        try {
+            CarDTO newCar = service.insertCar(car);
+
+            URI location = getUri(newCar.getId());
+            return ResponseEntity.created(location).build();
+        } catch(Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    private URI getUri(Long id) {
+        return ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(id).toUri();
     }
 
     @PutMapping("/{id}")
